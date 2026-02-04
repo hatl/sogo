@@ -758,7 +758,7 @@
     // This ensures the frontend uses the correct value immediately after saving,
     // without requiring a page reload
     if (_this.defaults.SOGoMailAutoMarkAsReadEnabled) {
-      if (_this.defaults.SOGoMailAutoMarkAsReadMode == 'immediate')
+      if (_this.defaults.SOGoMailAutoMarkAsReadMode === 'immediate')
         _this.defaults.SOGoMailAutoMarkAsReadDelay = 0;
       // If mode is 'delay', the delay value is already set by the UI
     } else {
