@@ -754,6 +754,17 @@
   Preferences.prototype.$save = function() {
     var _this = this;
 
+    // Update the in-memory SOGoMailAutoMarkAsReadDelay to match what will be saved
+    // This ensures the frontend uses the correct value immediately after saving,
+    // without requiring a page reload
+    if (_this.defaults.SOGoMailAutoMarkAsReadEnabled) {
+      if (_this.defaults.SOGoMailAutoMarkAsReadMode == 'immediate')
+        _this.defaults.SOGoMailAutoMarkAsReadDelay = 0;
+      // If mode is 'delay', the delay value is already set by the UI
+    } else {
+      _this.defaults.SOGoMailAutoMarkAsReadDelay = -1;
+    }
+
     return Preferences.$$resource.save("Preferences", this.$omit(true))
       .then(function(data) {
         // Make a copy of the data for an eventual reset
